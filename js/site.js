@@ -12,7 +12,7 @@ function getValues() {
 
     if(Number.isInteger(startValue) && Number.isInteger(endValue)){
         //call generateNumbers
-        let numbers = generateNumbers(startValue, endValue);
+        let numbers = fizzBuzz(startValue, endValue);
         //call displayNumbers
         displayNumbers(numbers);
     } else {
@@ -22,14 +22,31 @@ function getValues() {
 
 //generate numbers from the startvalue to the endvalue
 //logic function
-function generateNumbers(startValue, endValue) {
+function fizzBuzz(startValue, endValue) {
 
     let numbers = [];
 
     for(let i = startValue; i <= endValue; i++) {
 
+        if(i % 15 == 0) {
+            
+            numbers.push("FizzBuzz");
+        
+        } else if(i % 3 == 0) {
+
+            numbers.push("Fizz");
+
+        } else if(i % 5 == 0) {
+
+            numbers.push("Buzz");
+
+        } else {
+            
+            numbers.push(i);
+        }
+        
         //this will execute in a loop until index = endValue
-        numbers.push(i);
+        //numbers.push(i);
     }
 
     return numbers;
@@ -46,13 +63,13 @@ function displayNumbers(numbers) {
         let className = "";
         let number = numbers[index];
 
-        if(number % 2 == 0) {
+        if(number == "Fizz" || number == "Buzz" || number == "FizzBuzz") {
             
-            className = "even";
+            className = "fizzbuzz";
 
         } else {
 
-            className = "odd";
+            className = "normalize";
 
         }
         

@@ -1,17 +1,18 @@
 :root{
-    --primary-color: #08D9D6;
-    --secondary-color: #252A34;
+    --primary-color: #E41F28;
+    --secondary-color: #F39E22;
     --dark-color: #292929;
     --white-color: #e7e7e7;
 
     
 }
 
-.odd {
+.normalize {
     font-weight: 100;
 }
 
-.even {
+.fizzbuzz {
+    color: var(--primary-color);
     font-weight: bold;
 }
 
