@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+    <head>
+        <title>Tensquared: A Coding Project by Patrick Crane</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+        <script src="https://kit.fontawesome.com/5db21ba9c6.js" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="css/site.css">
+        <link rel="stylesheet" href="css/prism.css">
+        <link rel="icon" type="image/png" href="img/icons8-code-fork-48.png">    
+
+    </head>
+
+    <body class="d-flex flex-column h-100">
+        <!-- === Nav Section === -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top ">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img src="/img/logo-icon.png" class="" alt="Pat Crane Logo Icon" height="40"> Tensquared</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="app.html">The App</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="code.html">The Code</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" target="_blank" href="https://github.com/PatCrane/Tensquared">Git Repo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" target="_blank" href="#">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- === Main Section === -->
+        <main class="flex-shrink-0">
+            <div class="container py-5 px-5 mt-5">
+                <h2 class="border-1 border-bottom border-dark">The Code for Tensquared.</h2>
+                <div class="row row-cols-1 row-cols-lg-2">
+                    <div class="col-lg-8">
+                        <pre class="line-numbers">
+                            <code class="language-javascript">
+                                //get the values from the page
+                                //starts or controller function
+                                function getValues() {
+                                    //get values from the page
+                                    let startValue = document.getElementById("startValue").value;
+                                    let endValue = document.getElementById("endValue").value;
+                                    
+                                    //validate input
+                                    //parse into integers
+                                    startValue = parseInt(startValue);
+                                    endValue = parseInt(endValue);
+
+                                    if(Number.isInteger(startValue) && Number.isInteger(endValue)){
+                                        //call generateNumbers
+                                        let numbers = generateNumbers(startValue, endValue);
+                                        //call displayNumbers
+                                        displayNumbers(numbers);
+                                    } else {
+                                        alert("You must enter numbers");
+                                    }
+                                }
+
+                                //generate numbers from the startvalue to the endvalue
+                                //logic function
+                                function generateNumbers(startValue, endValue) {
+
+                                    let numbers = [];
+
+                                    for(let i = startValue; i <= endValue; i++) {
+
+                                        //this will execute in a loop until index = endValue
+                                        numbers.push(i);
+                                    }
+
+                                    return numbers;
+                                }
+
+                                //display the numbers and mark the even numbers bold
+                                //display or view function
+                                function displayNumbers(numbers) {
+                                    
+                                    let templateRows = "";
+
+                                    for (let index = 0; index < numbers.length; index++) {
+                                        
+                                        let className = "";
+                                        let number = numbers[index];
+
+                                        if(number % 2 == 0) {
+                                            
+                                            className = "even";
+
+                                        } else {
+
+                                            className = "odd";
+
+                                        }
+                                        
+                                        //This uses a template literal which does not render with Prisim. See source code in Github repo
+                                        templateRows += `<tr><td class="${className}">${number}</td></tr>`
+                                    }
+
+                                    document.getElementById("results").innerHTML = templateRows;
+                                }
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="col-lg-4">
+                        <p>The code is structured in three functions...</p>
+                        <h5>getValues()</h5>
+                        <p>On lines 5 and 6 two variables are set which hook onto our inputs in the markup by their id. In this case, "startValue" and "endValue". By default, the data type for these values are strings. On lines 10 and 11, we convert them to integers using the built-in Javascript parsing function <strong>parseInt()</strong>. On lines 13 through 20, we check if the data from the inputs are integers using the built-in Javascript function <strong>Number.isInteger()</strong>. If it is true that both values are of the data type integer, we set the "numbers" variable to our <strong>generateNumbers()</strong> function and then call our <strong>displayNumbers()</strong> function.</p>
+                        <h5>generateNumbers()</h5>
+                        <p>This function takes two integers which are our starting and ending numbers defined by the user. On line 27, we set an empty array which will contain the starting value, ending value and all of the numbers in between. On lines 29 through 33 we use a for-loop to iterate through the numbers using our start and end value adding a number and pushing it into our array on each iteration using the Javascript array method <strong>push()</strong>. Lastly, on line 35 the "numbers" array is returned.</p>
+                        <h5>displayNumbers()</h5>
+                        <p>This function takes an array of numbers as a parameter. On line 42, we set the variable "templateRows" to an empty string for now. This will contain the markup which will be dynamically generated. We then have a for-loop which iterates based on the length of our "numbers" array. On line 46, the variable "className" is an empty string which references a CSS class that is set later in the function. On line 47, we have a variable referencing the current index in the array. In lines 49 through 57, we check if the current number can be divided by two using the modulo operator. If so, our "className" variable is set to "even". If not, the "className" variable is set to "odd". These are CSS classes which in this case make the even numbers bold and keep the font-weight normal on odd numbers. On line 60, we populate our "templateRows" variable with the markup using a template literal (see source code as this is not rendered in the code snippet.) Lastly, on line 63 we populate the markup with the id of "results" with our "templateRows" variable.</p>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+        <!-- === Footer Section === -->
+        <footer class="footer mt-auto py-3">
+            <div class="container-fluid">
+                <div class="row row-cols-1 row-cols-md-3 gy-2">
+                    <div class="col order-last order-md-first text-light d-flex align-items-center">
+                        <div>
+                            <span class="text-muted">&copy;2021</span> Pat Crane
+                        </div>
+                    </div>
+                    <div class="cols d-flex align-items-center justify-content-start justify-content-md-center">
+                        <img src="/img/500px-logo-cropped.png" alt="Pat Crane Logo" height="80">
+                    </div>
+                    <div class="col d-flex align-items-center justify-content-start justify-content-md-end">
+                        <div class="row">
+                            <div class="col social">
+                                <a href="https://www.linkedin.com/in/patrick-crane-5b329a10a/" target="_blank">
+                                    <i class="fab fa-linkedin fa-2x"></i>
+                                </a>
+                            </div>
+                            <div class="col social">
+                                <a href="https://github.com/PatCrane" target="_blank">
+                                    <i class="fab fa-github fa-2x"></i>
+                                </a>
+                            </div>
+                            <div class="col social">
+                                <a href="https://twitter.com/patcranedev" target="_blank">
+                                    <i class="fab fa-twitter fa-2x"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        <script src="js/prism.js"></script>
+        <script>
+            Prism.plugins.NormalizeWhitespace.setDefaults({
+                'remove-trailing': true,
+                'remove-indent': true,
+                'left-trim': true,
+                'right-trim': true
+                })
+        </script>
+    </body>
+</html>  
