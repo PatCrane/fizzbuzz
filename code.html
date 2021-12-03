@@ -68,70 +68,87 @@
                                     //parse into integers
                                     startValue = parseInt(startValue);
                                     endValue = parseInt(endValue);
-
+                                
                                     if(Number.isInteger(startValue) && Number.isInteger(endValue)){
                                         //call generateNumbers
-                                        let numbers = generateNumbers(startValue, endValue);
+                                        let numbers = fizzBuzz(startValue, endValue);
                                         //call displayNumbers
                                         displayNumbers(numbers);
                                     } else {
                                         alert("You must enter numbers");
                                     }
                                 }
-
+                                
                                 //generate numbers from the startvalue to the endvalue
                                 //logic function
-                                function generateNumbers(startValue, endValue) {
-
+                                function fizzBuzz(startValue, endValue) {
+                                
                                     let numbers = [];
-
+                                
                                     for(let i = startValue; i <= endValue; i++) {
-
-                                        //this will execute in a loop until index = endValue
-                                        numbers.push(i);
+                                
+                                        if(i % 15 == 0) {
+                                            
+                                            numbers.push("FizzBuzz");
+                                        
+                                        } else if(i % 3 == 0) {
+                                
+                                            numbers.push("Fizz");
+                                
+                                        } else if(i % 5 == 0) {
+                                
+                                            numbers.push("Buzz");
+                                
+                                        } else {
+                                            
+                                            numbers.push(i);
+                                        }
+                                        
                                     }
-
+                                
                                     return numbers;
                                 }
-
+                                
                                 //display the numbers and mark the even numbers bold
                                 //display or view function
                                 function displayNumbers(numbers) {
                                     
                                     let templateRows = "";
-
+                                
                                     for (let index = 0; index < numbers.length; index++) {
                                         
                                         let className = "";
                                         let number = numbers[index];
-
-                                        if(number % 2 == 0) {
+                                
+                                        if(number == "Fizz" || number == "Buzz" || number == "FizzBuzz") {
                                             
-                                            className = "even";
-
+                                            className = "fizzBuzz";
+                                
                                         } else {
-
-                                            className = "odd";
-
+                                
+                                            className = "notFizzBuzz";
+                                
                                         }
                                         
                                         //This uses a template literal which does not render with Prisim. See source code in Github repo
                                         templateRows += `<tr><td class="${className}">${number}</td></tr>`
                                     }
-
+                                
                                     document.getElementById("results").innerHTML = templateRows;
                                 }
+                                
+                                
                             </code>
                         </pre>
                     </div>
                     <div class="col-lg-4">
                         <p>The code is structured in three functions...</p>
                         <h5>getValues()</h5>
-                        <p>On lines 5 and 6 two variables are set which hook onto our inputs in the markup by their id. In this case, "startValue" and "endValue". By default, the data type for these values are strings. On lines 10 and 11, we convert them to integers using the built-in Javascript parsing function <strong>parseInt()</strong>. On lines 13 through 20, we check if the data from the inputs are integers using the built-in Javascript function <strong>Number.isInteger()</strong>. If it is true that both values are of the data type integer, we set the "numbers" variable to our <strong>generateNumbers()</strong> function and then call our <strong>displayNumbers()</strong> function.</p>
-                        <h5>generateNumbers()</h5>
-                        <p>This function takes two integers which are our starting and ending numbers defined by the user. On line 27, we set an empty array which will contain the starting value, ending value and all of the numbers in between. On lines 29 through 33 we use a for-loop to iterate through the numbers using our start and end value adding a number and pushing it into our array on each iteration using the Javascript array method <strong>push()</strong>. Lastly, on line 35 the "numbers" array is returned.</p>
+                        <p>On lines 5 and 6 two variables are set which hook onto our inputs in the markup by their id. In this case, "startValue" and "endValue". By default, the data type for these values are strings. On lines 10 and 11, we convert them to integers using the built-in Javascript parsing function <strong>parseInt()</strong>. On lines 13 through 20, we check if the data from the inputs are integers using the built-in Javascript function <strong>Number.isInteger()</strong>. If it is true that both values are of the data type integer, we set the "numbers" variable to our <strong>fizzBuzz()</strong> function and then call our <strong>displayNumbers()</strong> function.</p>
+                        <h5>fizzBuzz()</h5>
+                        <p>This function takes two integers which are our starting and ending numbers defined by the user. On line 27, we set an empty array which will contain the starting value, ending value and all of the numbers in between. On lines 29 through 48 we use a for-loop to iterate through the numbers using our start and end value. The "magic" of the FizzBuzz algorithm lies in lines 31 - 46. On line 31, we check if the current index is a multiple of both 3 and 5 (15) by using the modulo operator == to 0. If this is true, than we push "FizzBuzz" to the array. On line 35, we check if the current index is a multiple of 3 using the modulo operator == to 0. If this is true, than we push "Fizz" to the array. Online 39, we check if the current index is a multiple of 5 using the modulo operator == 0. If this is true, we push "Buzz" to the array. If all of these checks are not true, than we simply push the number into the array. Lastly, on line 50 we return the array out of the function. 
                         <h5>displayNumbers()</h5>
-                        <p>This function takes an array of numbers as a parameter. On line 42, we set the variable "templateRows" to an empty string for now. This will contain the markup which will be dynamically generated. We then have a for-loop which iterates based on the length of our "numbers" array. On line 46, the variable "className" is an empty string which references a CSS class that is set later in the function. On line 47, we have a variable referencing the current index in the array. In lines 49 through 57, we check if the current number can be divided by two using the modulo operator. If so, our "className" variable is set to "even". If not, the "className" variable is set to "odd". These are CSS classes which in this case make the even numbers bold and keep the font-weight normal on odd numbers. On line 60, we populate our "templateRows" variable with the markup using a template literal (see source code as this is not rendered in the code snippet.) Lastly, on line 63 we populate the markup with the id of "results" with our "templateRows" variable.</p>
+                        <p>This function takes an array of numbers as a parameter. On line 57, we set the variable "templateRows" to an empty string for now. This will contain the markup which will be dynamically generated. We then have a for-loop which iterates based on the length of our "numbers" array. On line 61, the variable "className" is an empty string which references a CSS class that is set later in the function. In lines 59 through 76, we use a for-loop to iterate through our array. On line 64, we check to see if the current value is equal to the strings "Fizz", "Buzz", or "FizzBuzz". If so, we add the CSS class "fizzBuzz" to the HTML. If not, we add the CSS class "notFizzBuzz" to the HTML (**Note: This uses a template literal which does not render with Prisim. See source code in Github repo). Finally we give our complete "templateRows" array to the HTML element with the ID of "results".</p>
                     </div>
                 </div>
 

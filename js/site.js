@@ -45,8 +45,6 @@ function fizzBuzz(startValue, endValue) {
             numbers.push(i);
         }
         
-        //this will execute in a loop until index = endValue
-        //numbers.push(i);
     }
 
     return numbers;
@@ -65,11 +63,11 @@ function displayNumbers(numbers) {
 
         if(number == "Fizz" || number == "Buzz" || number == "FizzBuzz") {
             
-            className = "fizzbuzz";
+            className = "fizzBuzz";
 
         } else {
 
-            className = "normalize";
+            className = "notFizzBuzz";
 
         }
         

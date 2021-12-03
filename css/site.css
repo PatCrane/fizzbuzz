@@ -7,11 +7,11 @@
     
 }
 
-.normalize {
+.notFizzBuzz {
     font-weight: 100;
 }
 
-.fizzbuzz {
+.fizzBuzz {
     color: var(--primary-color);
     font-weight: bold;
 }
